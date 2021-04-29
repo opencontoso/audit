@@ -17,5 +17,5 @@ jobs:
           APP_ID: ${{ secrets.APP_ID }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       # use the repositories JSON output
-      run: |
+      - run: |
           echo '${{ steps.audit.outputs.repositories }}'
