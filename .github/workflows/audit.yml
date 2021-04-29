@@ -1,0 +1,21 @@
+name: Audit
+on:
+  schedule:
+    # Every day at 4am pacific time
+    - cron: 0 12 * * *
+  # manual trigger
+  workflow_dispatch: {}
+
+jobs:
+  sayHelloWorld:
+    runs-on: ubuntu-latest
+    steps:
+      # audit repositories
+      - uses: gr2m/github-organization-repository-auditing-action@v1.x
+        id: audit
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      # use the repositories JSON output
+      run: |
+          echo '${{ steps.audit.outputs.repositories }}'
